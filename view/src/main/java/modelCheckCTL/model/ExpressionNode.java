@@ -22,6 +22,10 @@ public class ExpressionNode {
        rightExpression = right;
     }
 
+    public ExpressionNode getLeftExpression() { return this.leftExpression ;}
+
+    public ExpressionNode getRightExpression() { return this.rightExpression ;}
+
     public void setLeftExpression(ExpressionNode leftExpression) {
         this.leftExpression = leftExpression;
     }

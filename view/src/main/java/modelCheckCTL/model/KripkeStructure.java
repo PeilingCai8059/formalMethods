@@ -1,10 +1,9 @@
 package modelCheckCTL.model;
-import modelCheckCTL.controller.KripkeStructureException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class KripkeStructure {
 
@@ -12,12 +11,15 @@ public class KripkeStructure {
     private List<Transition> transitions;
     private List<String> atoms;
 
-
     public KripkeStructure()throws Exception{
         this.states = new ArrayList<>();
         this.transitions = new ArrayList<>();
         this.atoms = new ArrayList<>();
     }
+
+    public List<State> getStates(){ return this.states;}
+    public List<Transition> getTransitions(){ return this.transitions;}
+
     public KripkeStructure(String definition) throws Exception {
         this();
         String[] sections = definition.trim().split(";");
