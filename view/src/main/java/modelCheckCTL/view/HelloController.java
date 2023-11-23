@@ -70,11 +70,11 @@ public class HelloController implements Initializable {
         boolean ifHold  = checker.ifHold() ;
         String res = "";
         if(ifHold) {
-            res = "formula " + formulaCtl + " holds";
+            res = formulaCtl + " holds";
         }else {
-            res = "formula " + formulaCtl + " doesn't hold";
+            res = formulaCtl + " doesn't hold";
         }
-        result.setText( fc.getName() + " --- "+ stateName + " --- " + formulaCtl + "===" +res );
+        result.setText( "In model " + fc.getName() + "\n"+ stateName + ": " +res );
     }
 
     @Override

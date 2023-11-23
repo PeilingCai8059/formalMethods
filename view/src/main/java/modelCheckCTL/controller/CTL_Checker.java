@@ -2,7 +2,6 @@ package modelCheckCTL.controller;
 
 import modelCheckCTL.model.*;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,10 +35,7 @@ public class CTL_Checker {
                 || name.equals("n1") || name.equals("n2") || name.equals("c1") || name.equals("c2")
                 || name.equals("t1") || name.equals("t2") || name.equals("1") || name.equals("2")) {
             Set<String> atomSet = ks.getState(sn).getAtomSet();
-            if (atomSet.contains(name)) {
-                return true;
-            }
-            return false;
+            return atomSet.contains(name);
         } else if (name.equals("^")) {
             return !SAT(node.getRightExpression(),sn);
         } else if (name.equals("&")){
@@ -47,8 +43,6 @@ public class CTL_Checker {
         } else if (name.equals("|")){
             return SAT(node.getLeftExpression(),sn) || SAT(node.getRightExpression(),sn);
         } else if (name.equals(">")){
-            boolean left= !SAT(node.getLeftExpression(),sn);
-            boolean right = SAT(node.getRightExpression(),sn);
             return !SAT(node.getLeftExpression(),sn) || SAT(node.getRightExpression(),sn);
         } else if(name.equals("A") && node.getRightExpression().getNodeName().equals("X")){  //AX
             boolean truthValueForAX = true;
@@ -77,16 +71,6 @@ public class CTL_Checker {
         }
 
         return false;
-    }
-
-    public HashSet<State> getNextStates(String stateName){
-        HashSet<State> nextStates = new HashSet<>();
-        for(Transition transition: ks.getTransitions()){
-            if(transition.getFromState().equals(stateName)){
-                nextStates.add(transition.getToState());
-            }
-        }
-        return nextStates;
     }
 
 

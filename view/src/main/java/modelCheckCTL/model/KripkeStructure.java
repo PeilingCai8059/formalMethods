@@ -1,10 +1,7 @@
 package modelCheckCTL.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-
 public class KripkeStructure {
 
     private List<State> states ;
@@ -78,8 +75,8 @@ public class KripkeStructure {
             }
 
             if(pair.length == 2){
-                String[] atoms = pair[1].trim().split(" ");
-                for(String atom: atoms){
+                String[] atomList = pair[1].trim().split(" ");
+                for(String atom: atomList){
                     if(!getState(stateNameInPair).getAtomSet().add(atom)){
                         throw new Exception("State " + stateNameInPair + ": atom " + atom +" is duplicate");
                     }

@@ -24,8 +24,8 @@ public class FormulaParser {
     public static ExpressionNode formulaParser(String formula){
         String convertedFormula = convertFormula(formula);
         System.out.println(convertedFormula);
-        ExpressionNode root = buildFormulaTree(convertedFormula);
-        return root;
+        buildFormulaTree(convertedFormula);
+        return buildFormulaTree(convertedFormula);
     }
 
     private static String convertFormula(String formula){
