@@ -27,24 +27,24 @@ public class CTL_Checker {
         return SAT(formulaRoot, this.stateName);
     }
 
-    public boolean SAT(ExpressionNode node, String sn) {
-        String name = node.getNodeName();
+    public boolean SAT(ExpressionNode node, String state_name) {
+        String symbol = node.getNodeName();
 
         //atomic
-        if (name.equals("p") || name.equals("q") || name.equals("r")||name.equals("t")
-                || name.equals("n1") || name.equals("n2") || name.equals("c1") || name.equals("c2")
-                || name.equals("t1") || name.equals("t2") || name.equals("1") || name.equals("2")) {
-            Set<String> atomSet = ks.getState(sn).getAtomSet();
-            return atomSet.contains(name);
-        } else if (name.equals("^")) {
-            return !SAT(node.getRightExpression(),sn);
-        } else if (name.equals("&")){
-            return SAT(node.getLeftExpression(),sn) && SAT(node.getRightExpression(),sn) ;
-        } else if (name.equals("|")){
-            return SAT(node.getLeftExpression(),sn) || SAT(node.getRightExpression(),sn);
-        } else if (name.equals(">")){
-            return !SAT(node.getLeftExpression(),sn) || SAT(node.getRightExpression(),sn);
-        } else if(name.equals("A") && node.getRightExpression().getNodeName().equals("X")){  //AX
+        if (symbol.equals("p") || symbol.equals("q") || symbol.equals("r")||symbol.equals("t")
+                || symbol.equals("n1") || symbol.equals("n2") || symbol.equals("c1") || symbol.equals("c2")
+                || symbol.equals("t1") || symbol.equals("t2") || symbol.equals("1") || symbol.equals("2")) {
+            Set<String> atomSet = ks.getState(state_name).getAtomSet();
+            return atomSet.contains(symbol);
+        } else if (symbol.equals("^")) {
+            return !SAT(node.getRightExpression(),state_name);
+        } else if (symbol.equals("&")){
+            return SAT(node.getLeftExpression(),state_name) && SAT(node.getRightExpression(),state_name) ;
+        } else if (symbol.equals("|")){
+            return SAT(node.getLeftExpression(),state_name) || SAT(node.getRightExpression(),state_name);
+        } else if (symbol.equals(">")){
+            return !SAT(node.getLeftExpression(),state_name) || SAT(node.getRightExpression(),state_name);
+        } else if(symbol.equals("A") && node.getRightExpression().getNodeName().equals("X")){  //AX
             boolean truthValueForAX = true;
             ExpressionNode subFormula = node.getRightExpression().getRightExpression();
             for(Transition transition : ks.getTransitions()){
@@ -56,7 +56,7 @@ public class CTL_Checker {
                 }
             }
             return truthValueForAX;
-        } else if(name.equals("E") && node.getRightExpression().getNodeName().equals("X")) {  //AX
+        } else if(symbol.equals("E") && node.getRightExpression().getNodeName().equals("X")) {  //AX
             boolean truthValueForEX = false;
             ExpressionNode subFormula = node.getRightExpression().getRightExpression();
             for (Transition transition : ks.getTransitions()) {
