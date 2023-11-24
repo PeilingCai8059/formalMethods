@@ -14,7 +14,6 @@ public class FileParser {
             }
             //delete after debug
             if(!Character.isLetter(sb.charAt(0))){
-                System.out.println("leading space");
                 sb.substring(1);
             };
         } catch (FileNotFoundException e) {
@@ -22,8 +21,6 @@ public class FileParser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String noLineBreaks = sb.toString();
-        System.out.println(noLineBreaks);
         return sb.toString();
     }
 

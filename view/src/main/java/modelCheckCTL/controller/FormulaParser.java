@@ -23,7 +23,6 @@ public class FormulaParser {
 
     public static ExpressionNode formulaParser(String formula){
         String convertedFormula = convertFormula(formula);
-        System.out.println(convertedFormula);
         buildFormulaTree(convertedFormula);
         return buildFormulaTree(convertedFormula);
     }
