@@ -2,6 +2,7 @@ package modelCheckCTL.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 public class KripkeStructure {
 
     private List<State> states ;
@@ -125,6 +126,10 @@ public class KripkeStructure {
             }
         }
         return new State();
+    }
+
+    public Set<String> getPropositionsForState(State state) {
+        return null;
     }
 
 
