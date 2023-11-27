@@ -145,7 +145,7 @@ public class CTL_Checker {
                 }
             }
 
-            return truthValueForAU; 
+            return truthValueForAU;
         } else if(symbol.equals("E") && node.getRightExpression().getNodeName().equals("U")) {
             boolean truthValueForEU = false;
             ExpressionNode subLeftFormula = node.getRightExpression().getLeftExpression();

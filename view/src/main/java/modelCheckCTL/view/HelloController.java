@@ -64,8 +64,6 @@ public class HelloController implements Initializable {
 
         String formulaCtl = formulaInput.getText();
         // fomular chekcing and CTL algorithm
-
-        //parameter:  kripkeStructure, stateName, formulaCtl
         CTL_Checker checker = new CTL_Checker(kripkeStructure, formulaCtl,stateName);
         boolean ifHold  = checker.ifHold() ;
         String res = "";
