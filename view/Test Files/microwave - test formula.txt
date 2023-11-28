@@ -1,0 +1,16 @@
+s1;s;false;
+s2;s;true;
+s3;s;false;
+s4;s;false;
+s5;s;true;
+s6;s;true;
+s7;s;true;
+s1;not h;true;
+s2;not h;true;
+s3;not h;true;
+s4;not h;false;
+s5;not h;true;
+s6;not h;true;
+s7;not h;false;
+
+

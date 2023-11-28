@@ -49,8 +49,12 @@ public class FormulaParser {
         int idx = str.indexOf(symbol);
         while(idx != -1){
             str.replace(idx, idx + symbol.length(),replacedSymbol);
+            if(replacedSymbol.equals("&") && str.charAt(idx-2)=='s' ){
+                str.replace(idx, idx + symbol.length(),"|");
+            }
             idx = str.indexOf(symbol);
         }
+        System.out.println(str);
         return str;
     }
 
@@ -61,7 +65,8 @@ public class FormulaParser {
             char currentChar = str.charAt(i);
             String c = String.valueOf(currentChar);
 
-            if (c.equals("p") || c.equals("q") || c.equals("r") || c.equals("0") || c.equals("1") || c.equals("2")) {
+            if (c.equals("p") || c.equals("q") || c.equals("r") || c.equals("s") || c.equals("e")
+                    || c.equals("h") || c.equals("0") || c.equals("1") || c.equals("2")) {
                 atomic.push(new ExpressionNode(c));
             } else if (c.equals("n") || c.equals("t") || c.equals("c")) {
                 if( i + 1 < str.length() && Character.isDigit(str.charAt(i+1))){

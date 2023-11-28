@@ -52,8 +52,8 @@ public class KripkeStructure {
                 throw new Exception("Transition " + transitionName + ": not in [fromState] - [toState] format ");
 
             }
-            State fromState = new State(fromAndToStates[0].trim());
-            State toState = new State(fromAndToStates[1].trim());
+            State fromState = getState(fromAndToStates[0].trim());
+            State toState = getState(fromAndToStates[1].trim());
             if(!containsState(fromState) || !containsState(toState)){
                 throw new Exception("Transition " + transitionName + ": contains invalid state ");
             }
@@ -62,6 +62,7 @@ public class KripkeStructure {
                 throw new Exception("Transition " + transitionName + ": duplicate transition ");
             }
             transitions.add(newTransition);
+            fromState.addImmediateStats(toState);
         }
 
         //construct atoms
