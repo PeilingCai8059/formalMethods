@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import modelCheckCTL.controller.*;
 import modelCheckCTL.model.KripkeStructure;
+import modelCheckCTL.model.State;
 
 public class HelloController implements Initializable {
 
@@ -54,7 +55,7 @@ public class HelloController implements Initializable {
     void checkCTL(ActionEvent event) throws Exception {
         String stateName = states.getValue();
         // check if the input state is valid in the kripke structure
-        if(!kripkeStructure.containsState(stateName)){
+        if(!stateName.equals("All States") && !kripkeStructure.containsState(stateName)){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error!");
             alert.setContentText("The Kripke Structure doesn't contains state : " + stateName );
@@ -63,16 +64,20 @@ public class HelloController implements Initializable {
         }
 
         String formulaCtl = formulaInput.getText();
+        String res = "Formula: " + formulaCtl + "\n";
         // fomular chekcing and CTL algorithm
-        CTL_Checker checker = new CTL_Checker(kripkeStructure, formulaCtl,stateName);
-        boolean ifHold  = checker.ifHold() ;
-        String res = "";
-        if(ifHold) {
-            res = formulaCtl + " holds";
+        if(stateName.equals("All States")){
+            for(State state : kripkeStructure.getStates()){
+                CTL_Checker checker = new CTL_Checker(kripkeStructure, formulaCtl,state.getStateName());
+                boolean ifHold  = checker.ifHold() ;
+                res = ifHold ? (res + "- "+ state.getStateName() + ": holds\n" ):(res + "- "+ state.getStateName() + " doesn't hold\n");
+            }
         }else {
-            res = formulaCtl + " doesn't hold";
+            CTL_Checker checker = new CTL_Checker(kripkeStructure, formulaCtl,stateName);
+            boolean ifHold  = checker.ifHold() ;
+            res = ifHold ? ( res + "- "+ stateName + ": holds\n") : ( res + "- "+ stateName + " doesn't hold\n");
         }
-        result.setText( "In model " + fc.getName() + "\n"+ stateName + ": " +res );
+        result.setText( "In " + fc.getName() + "\n" +res );
     }
 
     @Override
